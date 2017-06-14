@@ -1,0 +1,18 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>Categories</ion-title>
+        <ion-buttons end>
+            <button ion-button icon-only (click)="newItem()">
+                <ion-icon name="add"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+
+<ion-content>
+    <ion-list>
+        <button ion-item *ngFor="let item of (items | async)" (click)="itemSelected(item)">
+            {{ item.name }}
+        </button>
+    </ion-list>
+</ion-content>

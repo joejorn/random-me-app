@@ -1,0 +1,38 @@
+<ion-content>
+
+    <ion-navbar>
+        <ion-title>{{ category?.name }}</ion-title> 
+        <ion-buttons end>
+            <button ion-button small (click)="toggleEditMode()">{{ !editing? 'Edit':'Done'}}</button>
+        </ion-buttons>
+    </ion-navbar>
+
+    <!--<ion-grid padding>
+        <ion-row>
+            <ion-col>
+                <span class="content-title">{{ activeCategory?.name }}</span>
+            </ion-col>
+            <ion-col col-auto>
+                <button ion-button icon-only clear color="dark" small (click)="togglePopover($event)">
+                    <ion-icon small class="header-action"  name="arrow-dropdown"></ion-icon>
+                </button>
+            </ion-col>
+        </ion-row>
+    </ion-grid>-->
+
+    <!--<ion-grid>
+
+    <!--<rme-randomizer margin [hidden]="!items || items.length < 1" [items]="items"></rme-randomizer>-->
+    <rme-randomizer margin [items]="(items | noIgnoreItem: dummyCounter)"></rme-randomizer>
+
+
+    <ion-list inset>
+        <ion-item *ngFor="let item of items">
+            <ion-label [class.ignored-title]="!editing && item?.ignore">{{ item.name }}</ion-label>
+            <ion-checkbox [checked]="!item?.ignore" [hidden]="!editing" (ionChange)="onItemSelected(item)"></ion-checkbox>
+        </ion-item>
+    </ion-list>
+
+
+
+</ion-content>

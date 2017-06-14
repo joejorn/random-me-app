@@ -1,0 +1,44 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>{{ category?.name }}</ion-title>
+        <ion-buttons end>
+            <button ion-button *ngIf="!editing" (click)="toggleEditMode()">Edit</button>
+            <button ion-button *ngIf="editing" (click)="toggleEditMode()">Done</button>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+
+<ion-content>
+    <ion-list>
+        <ion-item *ngFor="let item of items" (click)="editItem(item)">
+            <ion-label>{{ item.name }}</ion-label>
+            <button ion-button icon-only clear item-end color="danger"
+                *ngIf="editing" (click)="removeItem(item, $event)" >
+                <ion-icon name="remove-circle"></ion-icon>
+            </button>
+        </ion-item>
+        <button *ngIf="!editing" ion-item detail-none clear (click)="newItem()">
+            <span ion-text color="primary">
+                <ion-icon name="add" padding-right></ion-icon>
+                New Item
+            </span></button>
+    </ion-list>
+
+    <ion-list *ngIf="editing" margin-top>
+
+        <ion-list-header>Category Actions</ion-list-header>
+
+        <button ion-item clear detail-none (click)="editCategory(category)">
+            <span ion-text color="primary">
+                <ion-icon name="create" padding-right></ion-icon>Rename
+            </span>
+        </button>
+
+        <button ion-item clear detail-none (click)="removeCategory(category)">
+            <span ion-text color="danger">
+                <ion-icon name="trash" padding-right></ion-icon>Delete
+            </span>
+        </button>
+
+    </ion-list>
+</ion-content>

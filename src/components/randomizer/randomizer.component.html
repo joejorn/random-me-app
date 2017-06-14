@@ -1,0 +1,28 @@
+<div class="component-wrapper">
+<ion-grid no-padding>
+    <ion-row padding-horizontal align-items-center
+        class="canvas" [class.transparent-lv-1]="!playing">
+        <ion-col text-center>
+            <span class="canvas-text">{{ items[activeIndex]?.name }}</span>
+        </ion-col>
+    </ion-row>
+</ion-grid>
+<div class="btn-overlay" float-start (click)="togglePlay()">
+    <ion-fab top right *ngIf="!(!items || items.length < 1)">
+
+        <button ion-fab color="light" class="bg-transparent" no-margin mini 
+            (click)="togglePlay($event)">
+            <ion-icon [name]="playing ? 'pause' : 'play'" large></ion-icon>
+        </button>
+
+    </ion-fab>
+    <ion-fab center middle *ngIf="!items || items.length < 1">
+
+        <button ion-fab color="light" no-margin mini disabled
+            (click)="togglePlay($event)">
+            <ion-icon name="close-circle" large></ion-icon>
+        </button>
+
+    </ion-fab>
+</div>
+</div>

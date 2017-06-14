@@ -1,0 +1,32 @@
+<ion-content>
+
+    <div class="content-header" padding-horizontal>
+        <h2 ion-text class="content-header-title" padding-horizontal>Catalog</h2>
+    </div>
+
+    <!--<ion-list no-lines padding-left>
+        <button no-padding ion-item *ngFor="let category of categories; let i = index" (click)="onItemSelected(category)">{{ category.name }}</button>
+    </ion-list>-->
+
+    <!-- Item Collection -->
+    <ion-grid padding>
+        <ion-row padding-horizontal>
+            
+            <ion-col class="gallery-gitter" col-6 *ngFor="let category of (categories | async)">
+                
+                <button class="gallery-btn fancy-btn" ion-button full (click)="onItemSelected(category)">
+                    <ion-label class="gallery-btn-title" no-margin>{{ category.name }}</ion-label>
+                </button>
+
+            </ion-col>
+
+            <!--<ion-col class="gallery-gitter" col-6>
+                <button class="gallery-btn clear-fancy-btn" ion-button full>
+                    <ion-label class="gallery-btn-title clear-style" no-margin>ADD</ion-label>
+                </button>
+            </ion-col>-->
+
+        </ion-row>
+    </ion-grid>
+
+</ion-content>
