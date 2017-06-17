@@ -1,32 +1,55 @@
 <ion-content>
 
-    <div class="content-header" padding-horizontal>
-        <h2 ion-text class="content-header-title" padding-horizontal>Catalog</h2>
-    </div>
+    <ion-grid padding margin-top>
 
-    <!--<ion-list no-lines padding-left>
-        <button no-padding ion-item *ngFor="let category of categories; let i = index" (click)="onItemSelected(category)">{{ category.name }}</button>
-    </ion-list>-->
+        <ion-row padding-vertical>
+            <ion-col align-self-center>
+                <h1 ion-text no-margin>Catalog</h1>
+            </ion-col>
+            <ion-col col-auto>
+                <!--<button ion-button clear small  no-margin (click)="add()">
+                    <ion-label>Add</ion-label>
+                </button>-->
+                <button ion-button clear small no-padding no-margin 
+                    [hidden]="(catalogs | async).length < 1"
+                    (click)="edit()">
+                    <ion-label>Edit</ion-label>
+                </button>
+            </ion-col>
+        </ion-row>
 
-    <!-- Item Collection -->
-    <ion-grid padding>
-        <ion-row padding-horizontal>
+        <ion-row>
             
-            <ion-col class="gallery-gitter" col-6 *ngFor="let category of (categories | async)">
+            <ion-col class="gallery-gitter" col-6 *ngFor="let catalog of (catalogs | async)">
                 
-                <button class="gallery-btn fancy-btn" ion-button full (click)="onItemSelected(category)">
-                    <ion-label class="gallery-btn-title" no-margin>{{ category.name }}</ion-label>
+                <button class="gallery-btn" ion-button full 
+                    [style.background-color]="catalog.color ? catalog.color.value : '#434343'" 
+                    (click)="onItemSelected(catalog)">
+                    <ion-label class="gallery-btn-title" no-margin>{{ catalog.name }}</ion-label>
                 </button>
 
             </ion-col>
 
-            <!--<ion-col class="gallery-gitter" col-6>
-                <button class="gallery-btn clear-fancy-btn" ion-button full>
-                    <ion-label class="gallery-btn-title clear-style" no-margin>ADD</ion-label>
+            <!-- [hidden]="(catalogs | async).length > 0" -->
+            <ion-col class="gallery-gitter" col-6>
+                <button class="gallery-btn clear-dark-btn" ion-button icon-only full color="light" (click)="add()">
+                    <ion-icon name="add"></ion-icon>
                 </button>
-            </ion-col>-->
+            </ion-col>
 
         </ion-row>
     </ion-grid>
 
+   
+
 </ion-content>
+
+<!-- <ion-footer>
+    <ion-toolbar>
+        <ion-buttons end margin-horizontal>
+            <button ion-button icon-only (click)="add()">
+                <ion-icon name="add"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-footer>-->

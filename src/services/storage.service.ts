@@ -8,11 +8,7 @@ export class StorageService {
     protected _counterKey: string;
     protected _counter: number; // auto-increment entry ID
 
-    // private _buffer: any[]; // cache
-
-    constructor( protected storage: Storage) {
-        // _buffer = [];
-    }
+    constructor( protected storage: Storage) { }
 
     prepareStorage(): Promise<any> {
         return this.initStore();

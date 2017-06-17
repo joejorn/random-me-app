@@ -2,6 +2,7 @@ rme-home {
     .content-header {
         margin-top: 8vh;
         margin-left: 8px;
+        margin-right: 8px;
     }
     .content-header-title {
         font-size: 36px;
@@ -36,7 +37,13 @@ rme-home {
         border-width: 2px;
         border-style: solid;
     }
-    .gallery-btn-title.clear-style {
-        color: #9C27B0;
+    .clear-dark-btn {
+        border-color: dimgray;
+        background: transparent;
+        border-width: 1px;
+        border-style: solid;
+    }
+    .gallery-btn-title.clear-dark-style {
+        color: dimgray;
     }
 }

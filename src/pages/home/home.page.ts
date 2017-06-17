@@ -2,10 +2,13 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { Observable } from 'rxjs';
 
-import { CategoryNotifyService } from '../../services/category-notify.service';
-import { ICategory } from '../../interfaces/category.interface';
+import { CatalogService } from '../../services/catalog.service'; 
+import { CatalogNotificationService } from '../../services/catalog-notification.service';
+import { ICatalog } from '../../interfaces/catalog.interface';
 
 import { PlayPage } from '../play/play.page';
+import { CatalogListPage } from '../catalog-list/catalog-list.page';
+import { CatalogEditorPage } from '../catalog-editor/catalog-editor.page';
 
 @Component({
     selector: 'rme-home',
@@ -14,17 +17,25 @@ import { PlayPage } from '../play/play.page';
 
 export class HomePage {
     
-    // categories: ICategory[];
-    categories: Observable<ICategory[]>;
+    catalogs: Observable<ICatalog[]>;
 
     constructor( 
-        private notifyService: CategoryNotifyService,
+        private notifyService: CatalogNotificationService,
+        private categoryService: CatalogService,
         private navCtrl: NavController
     ){
-        this.categories = this.notifyService.categoryAnnounced$;
+        this.catalogs = this.notifyService.categoryAnnounced$;
     }
 
-    onItemSelected(category: ICategory): void {
+    onItemSelected(category: ICatalog): void {
         this.navCtrl.push(PlayPage, { category: category } );
+    }
+
+    edit(): void {
+        this.navCtrl.push(CatalogListPage);
+    }
+
+    add(): void {
+        this.navCtrl.push(CatalogEditorPage);
     }
 }

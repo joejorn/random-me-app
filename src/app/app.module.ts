@@ -8,9 +8,9 @@ import { MyApp } from './app.component';
 // page
 import { HomePage } from '../pages/home/home.page';
 import { PlayPage } from '../pages/play/play.page';
-import { CategoryListPage, CategoryListPopoverPage } from '../pages/category-list/category-list.page';
-import { ItemListPage } from '../pages/item-list/item-list.page';
-import { TabsPage } from '../pages/tabs/tabs';
+import { CatalogListPage, CatalogListPopoverPage } from '../pages/catalog-list/catalog-list.page';
+import { CatalogEditorPage } from '../pages/catalog-editor/catalog-editor.page';
+import { ColorEditorPage } from '../pages/color-editor/color-editor.page';
 
 // pipe
 import { NoIgnorePipe } from '../pipes/filter.pipe';
@@ -20,20 +20,20 @@ import { RandomizerComponent } from '../components/randomizer/randomizer.compone
 // injectable
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-import { CategoryNotifyService } from '../services/category-notify.service'
-import { CategoryDataService } from '../services/category-data.service'
-import { ItemDataService } from '../services/item-data.service'
+import { CatalogNotificationService } from '../services/catalog-notification.service'
+import { CatalogService } from '../services/catalog.service'
+import { CatalogItemService } from '../services/catalog-item.service'
 
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
     PlayPage,
-    CategoryListPage,
-    CategoryListPopoverPage,
-    ItemListPage,
+    CatalogListPage,
+    CatalogListPopoverPage,
+    CatalogEditorPage,
+    ColorEditorPage,
     NoIgnorePipe,
-    TabsPage,
     RandomizerComponent
   ],
   imports: [
@@ -49,17 +49,17 @@ import { ItemDataService } from '../services/item-data.service'
     MyApp,
     HomePage,
     PlayPage,
-    CategoryListPage,
-    CategoryListPopoverPage,
-    ItemListPage,
-    TabsPage
+    CatalogListPage,
+    CatalogListPopoverPage,
+    CatalogEditorPage,
+    ColorEditorPage,
   ],
   providers: [
     StatusBar,
     SplashScreen,
-    CategoryNotifyService,
-    CategoryDataService,
-    ItemDataService,
+    CatalogNotificationService,
+    CatalogService,
+    CatalogItemService,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
