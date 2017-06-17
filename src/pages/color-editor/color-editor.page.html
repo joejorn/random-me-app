@@ -1,0 +1,31 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>
+            <ion-label>Color</ion-label>
+        </ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content>
+
+    <ion-list radio-group (ionChange)="onColorChanged($event)">
+        <!-- default color -->
+        <ion-item>
+            <ion-icon name="square" item-start [style.color]="'#434343'"></ion-icon>
+            <ion-label class="item-title">default</ion-label>
+            <ion-radio 
+                [checked]="!catalog.color" 
+                value=""></ion-radio>
+        </ion-item>
+
+        <!-- color palette-->
+        <ion-item *ngFor="let color of colors; let i = index">
+            <ion-icon name="square" item-start [style.color]="color.value"></ion-icon>
+            <ion-label class="item-title">{{ color.name }}</ion-label>
+            <ion-radio 
+                [checked]="colorIndex === i + 1" 
+                [value]="color.id"></ion-radio>
+        </ion-item>
+    </ion-list>
+
+</ion-content>

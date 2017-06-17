@@ -1,0 +1,109 @@
+<ion-header>
+    <ion-navbar #navbar>
+        <ion-title>
+            <ion-label>Catalog</ion-label>
+        </ion-title>
+        <ion-buttons end *ngIf="navbar.hideBackButton">
+            <button ion-button small (click)="dismiss()">Close</button>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+
+<ion-content>
+
+    <!-- Catalog -->
+    <ion-list>
+        <ion-list-header padding-top>Catalog</ion-list-header>
+        <ion-item>
+            <ion-label>Name</ion-label>
+            <ion-input type="text" 
+                [value]="catalog?.name"
+                (keyup.enter)="setBlur($event.target)"
+                (blur)="setCatalog($event)"></ion-input>
+        </ion-item>
+        <button ion-item (click)="selectColor()" *ngIf="editMode">Color</button>
+    </ion-list>
+
+    <!-- Item List -->
+    <ion-list padding-top [hidden]="!editMode">
+        
+        <!-- header -->
+        <ion-list-header padding-top>
+            <ion-label>Items</ion-label>
+            <button ion-button small>Edit</button>
+        </ion-list-header>
+
+        <!-- items -->
+        <ion-item *ngFor="let item of items">
+            
+            <!-- remove button -->
+            <button ion-button icon-only clear item-start color="danger"
+                [hidden]="!itemEditing"
+                (click)="deleteItem(item)" >
+                <ion-icon name="remove-circle"></ion-icon>
+            </button>
+
+            <!-- input -->
+            <ion-input type="text" placeholder="New Item" 
+                [value]="item.name"
+                (keyup.enter)="setBlur($event.target)"
+                (blur)="setItem($event, item)"></ion-input>
+        </ion-item>
+
+        <!-- new item -->
+        <button ion-item icon-only clear detail-none 
+            [disabled]="!editMode || itemEditing" 
+            (click)="setFocus(in)" >
+
+            <!-- icon -->
+            <ion-label color='primary'>
+                <ion-icon name="add" no-padding></ion-icon>
+            </ion-label>
+
+            <!-- input -->
+            <ion-input #in type="text" 
+                (keyup.enter)="setBlur($event.target)"
+                (focus)="adding = true"
+                (blur)="addItem($event); adding = false"
+                (click)="$event.stopPropagation()"></ion-input>
+        </button>
+
+    </ion-list>
+
+    <!--<ion-list padding-top [hidden]="!editMode">
+        <button ion-item clear full detail-none (click)="delete()">
+            <span ion-text color="danger">
+                <ion-icon name="trash" padding-right></ion-icon>
+                Delete Catalog
+            </span>
+        </button>
+    </ion-list>-->
+
+</ion-content>
+
+ <ion-footer>
+    <ion-toolbar>
+
+        <ion-buttons start padding-left>
+
+            <button ion-button color="danger"
+                [disabled]="!editMode" 
+                (click)="delete()">
+                <!--<ion-icon name="trash" isActive="false"></ion-icon>-->
+                <ion-label>Delete</ion-label>
+            </button>
+            
+        </ion-buttons>
+
+        <ion-buttons end padding-right>
+
+            <button ion-button
+                [disabled]="items.length<1" 
+                (click)="toggleItemEdit()">
+                <!--<ion-icon name="create" [isActive]="itemEditing"></ion-icon>-->
+                <ion-label>{{ !itemEditing ? 'Edit':'Done' }}</ion-label>
+            </button>
+
+        </ion-buttons>
+    </ion-toolbar>
+</ion-footer>
