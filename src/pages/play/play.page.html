@@ -3,8 +3,8 @@
         <ion-title>{{ category?.name }}</ion-title> 
         <ion-buttons end>
             <button ion-button small 
-                [disabled]="!items || items.length < 1" 
-                (click)="toggleEditMode()">
+                [disabled]="!items || items.length < 1 || randomizer.playing" 
+                (click)="toggleFilter()">
                 <ion-label>
                     {{ !editing? 'Filter':'Done'}}
                 </ion-label>
@@ -18,7 +18,7 @@
 
     <!--<rme-randomizer margin [hidden]="!items || items.length < 1" [items]="items"></rme-randomizer>-->
     <div class="randomizer-wrapper">
-        <rme-randomizer margin 
+        <rme-randomizer #randomizer margin 
             [playable]="!editing && items.length > 0"
             [items]="(items | noIgnoreItem: dummyCounter)"></rme-randomizer>
     </div>

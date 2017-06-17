@@ -94,40 +94,18 @@ export class PlayPage implements OnInit {
         }
     }
 
-
-    // TODO: remove this
-    toggleEditMode() {
+    toggleFilter() {
         // do something
+        if (this.randomizer.playing)
+            this.randomizer.stop();
+
         this.editing = !this.editing;
         this.navBar.hideBackButton = !this.navBar.hideBackButton;
     }
 
-    // TODO: remove this
-    // display Popover
-    togglePopover(e: any) {
-
-        // stop randomizer-process
-        this.randomizer.stop();
-
-        let popover = this.popoverCtrl.create(
-                                CatalogListPopoverPage, 
-                                { groupId: this.category.id }
-                            );
-                            
-        // callback
-        popover.onWillDismiss( data => {
-            if (data && data.group)
-                this.updateCategory(data.group);
-        });
-
-        popover.present({ev: e});
-    }
-
-    // TODO: remove this
-    // assign user-specific start index
-    setStartIndex( index: number ) {
-        if (!this.randomizer.playing) {
-            this.randomizer.activeIndex = index;
-        }
-    }
 }
+
+
+/*
+
+*/
