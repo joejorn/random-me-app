@@ -1,18 +1,18 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 
-import { ICategory } from '../interfaces/category.interface';
-import { CategoryDataService } from './category-data.service';
+import { ICatalog } from '../interfaces/catalog.interface';
+import { CatalogService } from './catalog.service';
 
 @Injectable()
-export class CategoryNotifyService {
+export class CatalogNotificationService {
 
-    private categoriesSubject: BehaviorSubject<ICategory[]>;
+    private categoriesSubject: BehaviorSubject<ICatalog[]>;
 
-    public categoryAnnounced$: Observable<ICategory[]>;
+    public categoryAnnounced$: Observable<ICatalog[]>;
 
-    constructor( private dataService: CategoryDataService ) {
-        this.categoriesSubject = new BehaviorSubject<ICategory[]>([]);
+    constructor( private dataService: CatalogService ) {
+        this.categoriesSubject = new BehaviorSubject<ICatalog[]>([]);
         this.syncDB();
         
         this.categoryAnnounced$ = this.categoriesSubject.asObservable();
@@ -20,19 +20,19 @@ export class CategoryNotifyService {
 
     // trigger sync()
     public notify(): void {
-        console.log('notify()');
+        // console.log('notify()');
         this.syncDB();
     }
 
     private syncDB(): void {
         this.dataService.getCategories()
             .then(
-                (vals: ICategory[]) => {
+                (vals: ICatalog[]) => {
                     if (vals) {
 
                         // sort by id
                         vals.sort(
-                            (catA: ICategory, catB: ICategory) => {
+                            (catA: ICatalog, catB: ICatalog) => {
                                 let valA = catA.name;
                                 let valB = catB.name;
 
