@@ -7,7 +7,7 @@
         </ion-col>
     </ion-row>
 </ion-grid>
-<div class="btn-overlay" float-start (click)="togglePlay()">
+<div class="btn-overlay" float-start [hidden]="!playable" (click)="togglePlay()">
     <ion-fab top right *ngIf="!(!items || items.length < 1)">
 
         <button ion-fab color="light" class="bg-transparent" no-margin mini 

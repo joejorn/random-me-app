@@ -1,12 +1,12 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { PopoverController, NavParams, Navbar, NavController } from 'ionic-angular';
 
-import { CategoryDataService } from '../../services/category-data.service';
-import { ItemDataService } from '../../services/item-data.service';
-import { ICategory } from '../../interfaces/category.interface';
-import { ICategoryItem } from '../../interfaces/category-item.interface';
+import { CatalogService } from '../../services/catalog.service';
+import { CatalogItemService } from '../../services/catalog-item.service';
+import { ICatalog } from '../../interfaces/catalog.interface';
+import { ICatalogItem } from '../../interfaces/catalog-item.interface';
 
-import { CategoryListPopoverPage } from '../category-list/category-list.page';
+import { CatalogListPopoverPage } from '../catalog-list/catalog-list.page';
 import { RandomizerComponent } from '../../components/randomizer/randomizer.component';
 
 @Component({
@@ -16,8 +16,8 @@ import { RandomizerComponent } from '../../components/randomizer/randomizer.comp
 
 export class PlayPage implements OnInit {
     
-    items: ICategoryItem[];
-    category: ICategory;
+    items: ICatalogItem[];
+    category: ICatalog;
 
     private dummyCounter: number;   // trigger for pipe
 
@@ -28,8 +28,8 @@ export class PlayPage implements OnInit {
 
     constructor( 
         private popoverCtrl: PopoverController,
-        private categoryService: CategoryDataService,
-        private itemService: ItemDataService,
+        private categoryService: CatalogService,
+        private itemService: CatalogItemService,
         private navParams: NavParams,
         private navCtrl: NavController
     ){
@@ -50,7 +50,7 @@ export class PlayPage implements OnInit {
             // no category 
             // -> choose one if available
             this.categoryService.getCategories()
-                .then( (cats: ICategory[]) => {
+                .then( (cats: ICatalog[]) => {
                     if (cats && cats.length > 0)
                     this.updateCategory(cats[0]);
                 });
@@ -72,7 +72,7 @@ export class PlayPage implements OnInit {
         this.navCtrl.popTo(this.navCtrl.getPrevious());
     }
 
-    updateCategory(category: ICategory, items?:ICategoryItem[]) {
+    updateCategory(category: ICatalog, items?:ICatalogItem[]) {
         if (category && category.id) {
             this.category = category;
             
@@ -85,7 +85,7 @@ export class PlayPage implements OnInit {
         }
     }
 
-    onItemSelected(item: ICategoryItem) {
+    onItemSelected(item: ICatalogItem) {
         item.ignore = !item.ignore;
         if (item.ignore) {
             this.dummyCounter++;
@@ -110,7 +110,7 @@ export class PlayPage implements OnInit {
         this.randomizer.stop();
 
         let popover = this.popoverCtrl.create(
-                                CategoryListPopoverPage, 
+                                CatalogListPopoverPage, 
                                 { groupId: this.category.id }
                             );
                             

@@ -1,6 +1,6 @@
 import { Component, Input, Output, EventEmitter, OnDestroy, OnChanges, SimpleChanges } from '@angular/core';
 
-import { ICategoryItem } from '../../interfaces/category-item.interface';
+import { ICatalogItem } from '../../interfaces/catalog-item.interface';
 
 @Component({
     selector: 'rme-randomizer',
@@ -16,23 +16,29 @@ export class RandomizerComponent implements OnDestroy, OnChanges {
     private TIME_INTERVAL: number = 3500;
     private MIN_ITERATIONS: number = 30;
     
-    public playing: boolean;
-    @Input() public activeIndex: number;
-    @Input() public items: ICategoryItem[];
-    @Output() public currentItem: EventEmitter<ICategoryItem>;
-
     private _timer: any;
+    public playing: boolean;
+
+    @Input() playable: boolean;
+    @Input() activeIndex: number;
+    @Input() items: ICatalogItem[];
+    @Output() currentItem: EventEmitter<ICatalogItem>;
+
 
     constructor() {
         this.activeIndex = 0;
         this.items = [];
-
+        // this.playable = false;
         this.currentItem = new EventEmitter();
     }
 
     ngOnChanges( changes: SimpleChanges ) {
-        if (changes['items'] && !changes.items.firstChange) {
-            this.activeIndex = 0;   // reset the start index
+        if (changes['items']) {
+            if (!changes.items.firstChange) {
+                this.activeIndex = 0;   // reset the start index
+            } else if (this.playable !== undefined || this.playable !== null) {
+                this.playable = changes['items'].currentValue.length > 0;
+            }
         }
     }
 
