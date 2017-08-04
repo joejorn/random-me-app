@@ -6,7 +6,6 @@ import { CatalogItemService } from '../../services/catalog-item.service';
 import { ICatalog } from '../../interfaces/catalog.interface';
 import { ICatalogItem } from '../../interfaces/catalog-item.interface';
 
-import { CatalogListPopoverPage } from '../catalog-list/catalog-list.page';
 import { RandomizerComponent } from '../../components/randomizer/randomizer.component';
 
 @Component({
